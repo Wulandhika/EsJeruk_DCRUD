@@ -255,5 +255,27 @@ namespace CRUDMahasiswaADO
             }
         }
 
+        // EVENT KLIK DATAGRIDVIEW - otomatis isi form
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                txtNIM.Text = row.Cells["NIM"].Value.ToString();
+                txtNama.Text = row.Cells["Nama"].Value.ToString();
+                cmbJK.Text = row.Cells["JenisKelamin"].Value.ToString();
+                if (row.Cells["TanggalLahir"].Value != DBNull.Value)
+                    dtpTanggalLahir.Value = Convert.ToDateTime(row.Cells["TanggalLahir"].Value);
+                txtAlamat.Text = row.Cells["Alamat"].Value.ToString();
+                txtKodeProdi.Text = row.Cells["KodeProdi"].Value.ToString();
+            }
+        }
 
+        // EVENT-Event kosong (biarkan saja)
+        private void cmbJK_SelectedIndexChanged(object sender, EventArgs e) { }
+        private void label1_Click(object sender, EventArgs e) { }
+        private void button1_Click(object sender, EventArgs e) { }
+        private void btnConnect_Click_1(object sender, EventArgs e) { }
+    }
+}
 
