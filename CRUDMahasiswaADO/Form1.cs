@@ -170,5 +170,52 @@ namespace CRUDMahasiswaADO
             }
         }
 
+        // TOMBOL UPDATE / MENGUBAH DATA
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtNIM.Text))
+                {
+                    MessageBox.Show("Pilih data dari DataGridView terlebih dahulu!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                if (!ValidateInput()) return;
+
+                OpenConnection();
+                string query = @"UPDATE Mahasiswa 
+                                SET Nama = @Nama, 
+                                    JenisKelamin = @JK, 
+                                    TanggalLahir = @TanggalLahir, 
+                                    Alamat = @Alamat, 
+                                    KodeProdi = @KodeProdi 
+                                WHERE NIM = @NIM";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@NIM", txtNIM.Text.Trim());
+                cmd.Parameters.AddWithValue("@Nama", txtNama.Text.Trim());
+                cmd.Parameters.AddWithValue("@JK", cmbJK.SelectedItem.ToString());
+                cmd.Parameters.AddWithValue("@TanggalLahir", dtpTanggalLahir.Value.Date);
+                cmd.Parameters.AddWithValue("@Alamat", txtAlamat.Text.Trim());
+                cmd.Parameters.AddWithValue("@KodeProdi", txtKodeProdi.Text.Trim());
+
+                int result = cmd.ExecuteNonQuery();
+                if (result > 0)
+                {
+                    MessageBox.Show("Data berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearForm();
+                    btnLoad.PerformClick();
+                }
+                else
+                {
+                    MessageBox.Show("Data tidak ditemukan!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                CloseConnection();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
