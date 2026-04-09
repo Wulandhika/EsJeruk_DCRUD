@@ -11,3 +11,10 @@ using System.Windows.Forms;
 // - dataGridView1
 // - labels yang sesuai
 
+namespace CRUDMahasiswaADO
+{
+    public partial class Form1 : Form
+    {
+        private SqlConnection conn;
+        private string connectionString = @"Data Source=LAPTOP-07AAA94J\SQLEXPRESS;Initial Catalog=DBAkademikADO;Integrated Security=True";
+
