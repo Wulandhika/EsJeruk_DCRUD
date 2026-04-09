@@ -108,5 +108,67 @@ namespace CRUDMahasiswaADO
             {
                 MessageBox.Show("Gagal koneksi: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }        // TOMBOL LOAD / MENAMPILKAN DATA
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenConnection();
+                string query = "SELECT NIM, Nama, JenisKelamin, TanggalLahir, Alamat, KodeProdi FROM Mahasiswa";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                dataGridView1.DataSource = dt;
+                reader.Close();
+                CloseConnection();
+
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                MessageBox.Show($"Data berhasil dimuat. Total: {dt.Rows.Count} record", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+        // TOMBOL INSERT / MENAMBAH DATA
+        private void btnInsert_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!ValidateInput()) return;
+
+                OpenConnection();
+                string query = @"INSERT INTO Mahasiswa (NIM, Nama, JenisKelamin, TanggalLahir, Alamat, KodeProdi, TanggalDaftar) 
+                                VALUES (@NIM, @Nama, @JK, @TanggalLahir, @Alamat, @KodeProdi, @TanggalDaftar)";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@NIM", txtNIM.Text.Trim());
+                cmd.Parameters.AddWithValue("@Nama", txtNama.Text.Trim());
+                cmd.Parameters.AddWithValue("@JK", cmbJK.SelectedItem.ToString());
+                cmd.Parameters.AddWithValue("@TanggalLahir", dtpTanggalLahir.Value.Date);
+                cmd.Parameters.AddWithValue("@Alamat", txtAlamat.Text.Trim());
+                cmd.Parameters.AddWithValue("@KodeProdi", txtKodeProdi.Text.Trim());
+                cmd.Parameters.AddWithValue("@TanggalDaftar", DateTime.Now);
+
+                int result = cmd.ExecuteNonQuery();
+                if (result > 0)
+                {
+                    MessageBox.Show("Data berhasil ditambahkan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearForm();
+                    btnLoad.PerformClick();
+                }
+                CloseConnection();
+            }
+            catch (SqlException ex) when (ex.Number == 2627)
+            {
+                MessageBox.Show("NIM sudah terdaftar! Gunakan NIM lain.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
 
