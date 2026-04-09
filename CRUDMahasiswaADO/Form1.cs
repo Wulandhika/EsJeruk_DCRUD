@@ -110,3 +110,27 @@ namespace CRUDMahasiswaADO
             }
         }
 
+        // TOMBOL LOAD / MENAMPILKAN DATA
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenConnection();
+                string query = "SELECT NIM, Nama, JenisKelamin, TanggalLahir, Alamat, KodeProdi FROM Mahasiswa";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                dataGridView1.DataSource = dt;
+                reader.Close();
+                CloseConnection();
+
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                MessageBox.Show($"Data berhasil dimuat. Total: {dt.Rows.Count} record", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
