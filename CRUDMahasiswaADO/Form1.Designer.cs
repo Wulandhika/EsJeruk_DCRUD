@@ -2,15 +2,8 @@
 {
     partial class Form1
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,12 +13,6 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
@@ -37,7 +24,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dtpTanggalLahir = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtAlamat = new System.Windows.Forms.MaskedTextBox();
+            this.txtAlamat = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtKodeProdi = new System.Windows.Forms.TextBox();
             this.btnConnect = new System.Windows.Forms.Button();
@@ -57,7 +44,6 @@
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "NIM";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // txtNIM
             // 
@@ -65,7 +51,7 @@
             this.txtNIM.Name = "txtNIM";
             this.txtNIM.Size = new System.Drawing.Size(161, 20);
             this.txtNIM.TabIndex = 1;
-            this.txtNIM.Text = "Input nomor induk mahasiswa";
+            this.txtNIM.Text = "";
             // 
             // label2
             // 
@@ -82,7 +68,7 @@
             this.txtNama.Name = "txtNama";
             this.txtNama.Size = new System.Drawing.Size(131, 20);
             this.txtNama.TabIndex = 3;
-            this.txtNama.Text = "Input nama mahasiswa";
+            this.txtNama.Text = "";
             // 
             // label4
             // 
@@ -95,13 +81,12 @@
             // 
             // cmbJK
             // 
+            this.cmbJK.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbJK.FormattingEnabled = true;
             this.cmbJK.Location = new System.Drawing.Point(124, 86);
             this.cmbJK.Name = "cmbJK";
             this.cmbJK.Size = new System.Drawing.Size(121, 21);
             this.cmbJK.TabIndex = 5;
-            this.cmbJK.Text = "Memilih jenis kelamin mahasiswa";
-            this.cmbJK.SelectedIndexChanged += new System.EventHandler(this.cmbJK_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -134,7 +119,7 @@
             this.txtAlamat.Name = "txtAlamat";
             this.txtAlamat.Size = new System.Drawing.Size(141, 20);
             this.txtAlamat.TabIndex = 9;
-            this.txtAlamat.Text = "Input alamat mahasiswa";
+            this.txtAlamat.Text = "";
             // 
             // label6
             // 
@@ -151,7 +136,7 @@
             this.txtKodeProdi.Name = "txtKodeProdi";
             this.txtKodeProdi.Size = new System.Drawing.Size(140, 20);
             this.txtKodeProdi.TabIndex = 11;
-            this.txtKodeProdi.Text = "Input kode program studi";
+            this.txtKodeProdi.Text = "";
             // 
             // btnConnect
             // 
@@ -208,8 +193,9 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(38, 240);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(706, 101);
+            this.dataGridView1.Size = new System.Drawing.Size(706, 150);
             this.dataGridView1.TabIndex = 17;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // Form1
             // 
@@ -240,10 +226,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
-        #endregion
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtNIM;
@@ -254,7 +237,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtpTanggalLahir;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.MaskedTextBox txtAlamat;
+        private System.Windows.Forms.TextBox txtAlamat;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtKodeProdi;
         private System.Windows.Forms.Button btnConnect;
@@ -265,4 +248,3 @@
         private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
-
