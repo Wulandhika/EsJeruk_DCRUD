@@ -217,5 +217,43 @@ namespace CRUDMahasiswaADO
             }
         }
 
+        // TOMBOL DELETE / MENGHAPUS DATA
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtNIM.Text))
+                {
+                    MessageBox.Show("Pilih data dari DataGridView terlebih dahulu!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                DialogResult confirm = MessageBox.Show($"Yakin akan menghapus data dengan NIM: {txtNIM.Text}?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (confirm == DialogResult.No) return;
+
+                OpenConnection();
+                string query = "DELETE FROM Mahasiswa WHERE NIM = @NIM";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@NIM", txtNIM.Text.Trim());
+
+                int result = cmd.ExecuteNonQuery();
+                if (result > 0)
+                {
+                    MessageBox.Show("Data berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearForm();
+                    btnLoad.PerformClick();
+                }
+                else
+                {
+                    MessageBox.Show("Data tidak ditemukan!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                CloseConnection();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
 
 
